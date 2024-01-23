@@ -1,4 +1,4 @@
-![logo][logo.jpg]
+![logo](logo.jpg)
 ## App to track package
 
 ---
