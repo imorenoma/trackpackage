@@ -11,3 +11,10 @@ El paquete tiene las siguientes caracteristicas:
 - consultar fecha de entrega
 - eliminar pedido
 ---
+## Team Trackpackage Inc
+---
+- Daniel: doc
+- Iván: dev
+- Jose: cordinador
+- Santiago: bbdd
+---
