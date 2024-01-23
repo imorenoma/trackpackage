@@ -1,4 +1,4 @@
-!(/Descargas/logo.jpg)
+
 ## App to track package
 
 ---
