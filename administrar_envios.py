@@ -16,6 +16,7 @@ def crear_envio():
     destinatario = input("Destinatario: ")
     paquete = input("Paquete: ")
     fecha_envio = input("Fecha de envío: ")
+    fecha_entrega = input("Fecha de entrega: ")
 
     # Crear un documento para el envío
     envio = {
@@ -23,6 +24,7 @@ def crear_envio():
         "destinatario": destinatario,
         "paquete": paquete,
         "fecha_envio": fecha_envio,
+        "fecha_entrega": fecha_entrega,
         "estado": 1
     }
 
@@ -75,6 +77,19 @@ def editar_fecha_entrega():
 def consultar_envio():
     # Solicitar el ID del envío
     id_envio = input("ID del envío: ")
-
     # Consultar el documento
     envio = envios_col.document(id_envio).get()
+
+def listar_envios():
+    # Obtener todos los envíos de la colección
+    envios = envios_col.get()
+
+    # Imprimir los datos de los envíos
+    for envio in envios:
+        print("ID del envío:", envio.id)
+        print("Remitente:", envio.get("remitente"))
+        print("Destinatario:", envio.get("destinatario"))
+        print("Paquete:", envio.get("paquete"))
+        print("Fecha de envío:", envio.get("fecha_envio"))
+        print("Fecha de entrega:", envio.get("fecha_entrega"))
+        print("Estado:", envio.get("estado"))
