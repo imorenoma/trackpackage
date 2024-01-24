@@ -8,6 +8,7 @@ firebase_admin.initialize_app(cred)
 
 db=firestore.client()
 
+
 def menu():
     print("Bienvenido a TrackPackage. Elige una opción")
     while True:
@@ -26,9 +27,11 @@ def menu():
         
         elif opcion == 1:
             id = int(input("Ingresa id del package: "))
+
             name = input(("Ingresa tu nombre: "))
             premium = bool(input("Eres premium (True/False): ").lower())
-            db.collection('TrackPackageInc').add({'id': id, 'name': name, 'premium': premium})
+            db.collection('TrackPackageInc').document(str(id)).set({'id': id, 'name': name, 'premium': premium})        
+            #db.collection('TrackPackageInc').document(str(id)).add({'id': id, 'name': name, 'premium': premium})
             opcion = int(input("\n Deseas continuar? \n 1. SI \n 2. NO \n"))
             if opcion == 2:
                 break
@@ -75,19 +78,10 @@ def menu():
 
         elif opcion == 5: 
             id = input("Inserta el nº de id que deseas eliminar: \n")
-            results = db.collection('TrackPackageInc').where('id', '==', id).get()
 
-            print(results, '\n', type(results) )
-
-            # for result in results:
-            #     if result.exists:
-            #         db.collection('TrackPackageInc').document('zgqC7Xv0WIMmWuRmRWoP').delete()
-            #         opcion = int(input("\n Deseas continuar? \n 1. SI \n 2. NO \n"))
-            #         if opcion == 2:
-            #             break
-            #         else:
-            #             continue
-            
+            results = db.collection('TrackPackageInc').where('id', '==', id).get()            
+            db.collection('TrackPackageInc').document(id).delete()
+           
 
         else:
             print("Opción no válida. Por favor, ingresa un número del 0 al 5.")
