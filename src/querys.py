@@ -3,7 +3,8 @@ import os
 import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
-
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
 def auth_cred():    
 
@@ -24,10 +25,30 @@ def auth_cred():
     )
     return cred
 
+
+def app_cred():
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBw5uCo5X3lEx0KpKmU6xnUgS9f2pHNY2g",
+        authDomain: "trackerapp-9a5d0.firebaseapp.com",
+        projectId: "trackerapp-9a5d0",
+        storageBucket: "trackerapp-9a5d0.appspot.com",
+        messagingSenderId: "64206924966",
+        appId: "1:64206924966:web:fb769208690b3cbb819867",
+        measurementId: "G-869E2KSZTZ"
+    };
+    
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    return firebaseConfig
+
+
 def insert_data(load_cred):   
     
     # cred = credentials.ApplicationDefault()
-    firebase_admin.initialize_app(load_cred)
+    # firebase_admin.initialize_app(load_cred)
+    
     
 
     db = firestore.client()
@@ -44,16 +65,17 @@ def insert_data(load_cred):
 
     return msg
 
+
 load_dotenv()
 
 # AUTH ENV VAR
 
-PROJECT_ID = os.environ.getenv('FIREBASE_PROJECT_ID')
-PRIVATE_KEY_ID = os.environ.getenv('FIREBASE_PRIVATE_KEY_ID')
-PRIVATE_KEY = os.environ.getenv('FIREBASE_PRIVATE_KEY_ID').replace('\\n', '\n') 
-CLIENT_EMAIL = os.environ.getenv('FIREBASE_CLIENT_EMAIL')
-CLIENT_ID =  os.environ.getenv('FIREBASE_CLIENT_ID')
-CLIEN_X509_CERT_URL = os.environ.getenv('FIREBASE_CLIENT_X509_CERT_URL')
+PROJECT_ID = os.getenv('FIREBASE_PROJECT_ID')
+PRIVATE_KEY_ID = os.getenv('FIREBASE_PRIVATE_KEY_ID')
+PRIVATE_KEY = os.getenv('FIREBASE_PRIVATE_KEY_ID').replace('\\n', '\n') 
+CLIENT_EMAIL = os.getenv('FIREBASE_CLIENT_EMAIL')
+CLIENT_ID =  os.getenv('FIREBASE_CLIENT_ID')
+CLIEN_X509_CERT_URL = os.getenv('FIREBASE_CLIENT_X509_CERT_URL')
     
 load_cred = auth_cred()
     
