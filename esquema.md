@@ -10,3 +10,5 @@
 - - Editar fecha de entrega
 - Consultar envio individula 
 - Listar envíos por filtro de estado
+# adjunto sugerencia de posible codigo 
+amdminsitrar_envios.py
