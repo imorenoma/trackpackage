@@ -1,82 +1,53 @@
-import os
-# from dotenv import load_dotenv
 import firebase_admin
-from firebase_admin import firestore
 from firebase_admin import credentials
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
-def auth_cred():    
-
-    cred = credentials.Certificate(
-        {
-            "type": "service_account",
-            'project_id': PROJECT_ID,
-            'private_key_id': PRIVATE_KEY_ID,
-            'private_key': PRIVATE_KEY,
-            'client_email': CLIENT_EMAIL,
-            'client_id': CLIENT_ID,
-            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-            "token_uri": "https://oauth2.googleapis.com/token",
-            "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-            "client_x509_cert_url": CLIEN_X509_CERT_URL,
-            "universe_domain": "googleapis.com"
-        }
-    )
-    return cred
+from firebase_admin import firestore
 
 
-def app_cred():
+cred = credentials.Certificate("jsonFiles/secretAccountKey.json")
+firebase_admin.initialize_app(cred)
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyBw5uCo5X3lEx0KpKmU6xnUgS9f2pHNY2g",
-        authDomain: "trackerapp-9a5d0.firebaseapp.com",
-        projectId: "trackerapp-9a5d0",
-        storageBucket: "trackerapp-9a5d0.appspot.com",
-        messagingSenderId: "64206924966",
-        appId: "1:64206924966:web:fb769208690b3cbb819867",
-        measurementId: "G-869E2KSZTZ"
-    };
+db = firestore.client()
+
+def check_stayOrGo():
+
+    option = input("\n Do you want to continue? \n 1. Yes \n 2. NO \n")
     
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-
-    return firebaseConfig
-
-
-def insert_data(load_cred):   
+    if option == "Yes" or option == "yes" or option == "Y" or option == "y":
+        option = 1
+        return option
+        
+    if  option == "No" or option == "no" or option == "N" or option == "n":
+        option = 2
+        return option
     
-    # cred = credentials.ApplicationDefault()
-    # firebase_admin.initialize_app(load_cred)
-    
+    if option == "1" or option == "2":
+        return int(option)
     
 
-    db = firestore.client()
+def create_Registry():
 
-    insert_values = {
-       "track_number": 12345124532632
-    }
+    id = int(input("Insert id of the package: "))
+
+    name = input(("Tell us your name: " ))
+    premium = bool(input("Are you Premium (True/False): ").lower())
+
+    db.collection('TrackPackageInc').document(str(id)).set({'id': id, 'name': name, 'premium': premium})        
     
-    try:
-        doc_ref = db.collection("package").add(insert_values)
-        msg = f"Document added with ID: {doc_ref.id}"
-    except Exception as e:
-        msg = f"Error inserting data: {str(e)}"
+    return check_stayOrGo()
 
-    return msg
-
-
-load_dotenv()
-
-# AUTH ENV VAR
-
-PROJECT_ID = os.getenv('FIREBASE_PROJECT_ID')
-PRIVATE_KEY_ID = os.getenv('FIREBASE_PRIVATE_KEY_ID')
-PRIVATE_KEY = os.getenv('FIREBASE_PRIVATE_KEY_ID').replace('\\n', '\n') 
-CLIENT_EMAIL = os.getenv('FIREBASE_CLIENT_EMAIL')
-CLIENT_ID =  os.getenv('FIREBASE_CLIENT_ID')
-CLIEN_X509_CERT_URL = os.getenv('FIREBASE_CLIENT_X509_CERT_URL')
     
-load_cred = auth_cred()
+def check_Database():
+
+    document = input("Insert the track number: \n")
+    result = db.collection('TrackPackageInc').document(document).get()
+
+    if result.exists:
+        result_to_dict = result.to_dict()
+
+        print("---------------------")
+        for key, value in result_to_dict.items():
+            print(f"{key} : {value}", '\n')
+        print("---------------------")
     
+    return check_stayOrGo()
 
