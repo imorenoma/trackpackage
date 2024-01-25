@@ -39,7 +39,7 @@ def check_stayOrGo():
 
 def create_Registry():
 
-    id = int(input("Insert id of the package: "))
+    id = int(input("Insert track number of the package: "))
 
     name = input(("Tell us your name: " ))
     premium = bool(input("Are you Premium (True/False): ").lower())
@@ -74,7 +74,7 @@ def update_Data():
             name = input("Now tell us your new name: ")
             db.collection('TrackPackageInc').document(result.id).update({'name': name})
         else:
-            print(" track number not found in database")
+            print("track number not found in database")
 
     return check_stayOrGo()
 
