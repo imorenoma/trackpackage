@@ -36,7 +36,12 @@ def main():
                     break
                 if request == 1:
                     continue
-                # elif option == 3:
+            elif option == 3:
+                request = querys.update_Data()
+                if request == 2:
+                    break
+                if request == 1:
+                    continue
                 # elif option == 4:
                 # elif option == 5:
             else:
