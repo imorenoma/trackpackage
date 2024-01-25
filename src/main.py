@@ -23,7 +23,6 @@ def main():
     try:
         while True:
 
-            
             print_menu()
 
             option = int(input("Select yor option: "))
@@ -61,6 +60,7 @@ def main():
                     continue
 
             elif option == 5:
+                print('\n')
                 print("See you soon!", '\n')
                 print("Exit app ...", '\n')
                 break
