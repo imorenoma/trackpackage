@@ -8,9 +8,22 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
+def advise_of_detete():
+
+    print("Attention, You are going to delete your Delivery, are you sure?")
+    print("1. i WANT to delete")
+    print("2. im not sure, plese get me out of here ")
+
+    options = int(input("Select carefully: "))
+
+    if options == 1 :
+        return 0
+    if options == 2 :
+        return 1
+
 def check_stayOrGo():
 
-    option = input("\n Do you want to continue? \n 1. Yes \n 2. NO \n")
+    option = input("\n Do you want do other operations? \n 1. Yes \n 2. NO \n")
     
     if option == "Yes" or option == "yes" or option == "Y" or option == "y":
         option = 1
@@ -58,9 +71,26 @@ def update_Data():
 
     for result in results:
         if result.exists:
-            name = input("Now tell us your new name: \n")
+            name = input("Now tell us your new name: ")
             db.collection('TrackPackageInc').document(result.id).update({'name': name})
         else:
             print(" track number not found in database")
 
     return check_stayOrGo()
+
+def delete_Data():    
+    
+    check_point = advise_of_detete()
+
+    if check_point == 0 :
+        id = input("Insert your track number: ")
+
+        db.collection('TrackPackageInc').where('id', '==', id).get()            
+        db.collection('TrackPackageInc').document(id).delete()
+
+        print("Your delivery was Deleted")
+
+        return check_stayOrGo()
+    
+    if check_point == 1:
+        return check_stayOrGo()
