@@ -7,10 +7,10 @@ def print_menu():
     print("Select a option")
     print("------------------------------",'\n')
 
-    print("1. Create Registry")
-    print("2. Read database")
+    print("1. Create delivery")
+    print("2. Read delivery")
     print("3. Update delivery")
-    print("4. Delete database")
+    print("4. Delete delivery")
     print("5. Exit app")
 
     print('\n')        
