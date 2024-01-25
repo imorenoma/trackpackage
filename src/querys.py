@@ -8,7 +8,7 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
-def advise_of_detete():
+def advise_of_delete():
 
     print("Attention, You are going to delete your Delivery, are you sure?")
     print("1. i WANT to delete")
@@ -80,7 +80,7 @@ def update_Data():
 
 def delete_Data():    
     
-    check_point = advise_of_detete()
+    check_point = advise_of_delete()
 
     if check_point == 0 :
         id = input("Insert your track number: ")
