@@ -51,3 +51,16 @@ def check_Database():
     
     return check_stayOrGo()
 
+def update_Data():
+
+    id = int(input("You are going to change your name, send us your tracknumber: \n"))
+    results = db.collection('TrackPackageInc').where('id', '==', id).get()
+
+    for result in results:
+        if result.exists:
+            name = input("Now tell us your new name: \n")
+            db.collection('TrackPackageInc').document(result.id).update({'name': name})
+        else:
+            print(" track number not found in database")
+
+    return check_stayOrGo()
