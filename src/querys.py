@@ -3,7 +3,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 
 
-cred = credentials.Certificate("jsonFiles/secretAccountKey.json")
+cred = credentials.Certificate("jsonFiles/keyJson.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
@@ -50,8 +50,9 @@ def create_Registry():
 
     
 def check_Database():
+    
+    document = input("Insert the track number: \n")            
 
-    document = input("Insert the track number: \n")
     result = db.collection('TrackPackageInc').document(document).get()
 
     if result.exists:
@@ -61,6 +62,8 @@ def check_Database():
         for key, value in result_to_dict.items():
             print(f"{key} : {value}", '\n')
         print("---------------------")
+    else:
+        print("The track number is not in our Database")
     
     return check_stayOrGo()
 
