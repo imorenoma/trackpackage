@@ -11,6 +11,11 @@ El paquete tiene las siguientes caracteristicas:
 - modificar estado
 - consultar fecha de entrega
 - eliminar pedido
+
+Por seguridad se ha eliminado el fichero que esta dentro de jsonFiles/
+para generar la autenticacion de firebase
+y para ello se ha creado un fichero key.py que usa un fichero .env 
+donde estan guardados los datos sensibles.
 ---
 ## Team Trackpackage Inc
 ---
@@ -41,4 +46,5 @@ El paquete tiene las siguientes caracteristicas:
 9. Pablo, como autónomo dedicado a la creación artística, quiere optimizar su tiempo utilizando el seguimiento de pedidos para planificar la recepción de suministros necesarios para sus proyectos. 
 10. Antonio, como emprendedor al frente de una empresa de reventa, quiere  utilizar el seguimiento de pedidos para construir una reputación de confianza y eficiencia en el servicio al cliente, ofreciendo a sus clientes información detallada y actualizada sobre sus compras.
 ---
+
 
